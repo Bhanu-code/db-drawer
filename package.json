@@ -1,6 +1,6 @@
 {
   "name": "db-drawer",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "schema visualization and validation tool for node.js",
   "main": "index.js",
   "scripts": {
