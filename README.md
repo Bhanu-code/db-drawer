@@ -41,9 +41,9 @@ npm install
 npm install -g 
 //on the demo project
 //run the command for sequelize
-dbdraw s
+db-draw s
 //run the command for mongoose
-dbdraw m
+db-draw m
 
 // hit enter and it will run localhost where you can see your schema, relationship and constraints in a tablular format
 //create a branch, make changes and raise PR
