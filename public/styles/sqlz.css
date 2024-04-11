@@ -1,0 +1,73 @@
+
+body{
+  font-family: "Reddit Mono", monospace;
+  font-optical-sizing: auto;
+  font-weight: 500;
+  font-style: normal;
+  background-color: rgb(58, 55, 55);
+}
+
+.rate{
+  position: absolute;
+  /* left: 20rem; */
+  right: 1rem;
+}
+
+a{
+  text-decoration: none;
+}
+
+img{
+  width: 20px;
+  height: 20px;
+}
+
+
+* {
+  box-sizing: border-box;
+}
+
+/* Create a two-column layout */
+.column {
+  float: left;
+  width: 50%;
+  padding: 5px;
+}
+
+/* Clearfix (clear floats) */
+.row::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+
+
+table {
+  border-collapse: collapse;
+  /* margin: auto; */
+  background-color: rgb(252, 252, 216);
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
+.table-name{
+  /* text-align: center; */
+  color: whitesmoke;
+}
+
+th,
+td {
+  text-align: left;
+  padding: 8px;
+}
+
+tr:nth-child(even) {
+  background-color: #d6eeee;
+}
+
+.flag {
+  color: white;
+  border-radius: 5px;
+  text-decoration: none;
+  border: none;
+  font-weight: bold;
+}

@@ -1,0 +1,104 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Server</title>
+    <link rel="stylesheet" href="./styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Reddit+Mono:wght@200..900&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/arrow-line/dist/arrow-line.min.js">
+    </script>
+
+    <style>
+        body {
+            font-family: "Reddit Mono", monospace;
+            font-optical-sizing: auto;
+            font-weight: 500;
+            font-style: normal;
+
+        }
+
+        table {
+            border-collapse: collapse;
+            margin: auto;
+            background-color: rgb(252, 252, 216);
+            box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+        }
+
+        .table-name {
+            text-align: center;
+        }
+
+        th,
+        td {
+            text-align: left;
+            padding: 8px;
+        }
+
+        tr:nth-child(even) {
+            background-color: #e1f8f8;
+        }
+
+        .flag {
+            color: white;
+            border-radius: 5px;
+            text-decoration: none;
+            border: none;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+    <% let index=0 %>
+
+        <% fieldsArr.forEach(field=> { %>
+            <table>
+                <thead>
+                    <tr>
+                        <h2 id="end" class="table-name">
+                            <%= modelsArr[index].collection.collectionName %>
+                        </h2>
+                    </tr>
+                </thead>
+
+                <% const obj=Object.keys(field) %>
+                    <tr>
+                        <% obj.forEach(i=>{ %>
+                            <td>
+                                <%= i %>
+                            </td>
+                            <td>
+                                <%= modelsArr[index].schema.path(i).instance %>
+                            </td>
+
+                            <% if(field[i].required===true){ %>
+                                <td>
+                                    <button class="flag" style="background-color:rgb(146, 248, 143)">required</button>
+                                </td>
+                                <% } %>
+
+                                    <% if(field[i].unique===true){ %>
+                                        <td>
+                                            <button class="flag"
+                                                style="background-color:rgb(79, 79, 253)">unique</button>
+                                        </td>
+                                        <% } %>
+                    </tr>
+                    <% }) %>
+
+            </table>
+            <br>
+            <% index++ %>
+                <% }) %>
+                    </div>
+                    <script>
+                        setInterval(() => {
+                            location.reload()
+                        }, 2000);
+                    </script>
+</body>
+
+</html>
