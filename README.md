@@ -26,6 +26,7 @@ db-draw m
 ## Screenshots
 
 ![alt text](mongo2.png)
+![alt text](sql.png)
 
 ## Local Setup
 
