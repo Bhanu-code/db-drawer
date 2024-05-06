@@ -5,6 +5,8 @@ a cli tool for visualising your database schemas. db-drawer checks the data mode
 
 currently, we have support only for sequelize and mongoose.
 
+refer to the video link to get a quick glipmse of the project: https://youtu.be/FTxOed97E2A?si=RuxWV1J56LuWdVmA
+
 Join Our Discord channel: <a></a>https://discord.gg/hMQcQcng
 
 
@@ -33,6 +35,7 @@ db-draw m
 Note: [ Don't commit to main branch, always create a seprate branch before raising PR ]
 
 ```javascript
+// You will need a demo project that has "/models" folder to see your models visualised.
 //To setup the project locally, for the repository and copy the forked copy the https url
 //in the terminal write
 git clone [repo-url]
@@ -41,7 +44,7 @@ npm install
 // have a project that has "models" folder
 //install dbdrawer-mongo to the project globally
 npm install -g 
-//on the demo project
+// Open the demo project
 //run the command for sequelize
 db-draw s
 //run the command for mongoose
