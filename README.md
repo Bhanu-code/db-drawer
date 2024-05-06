@@ -4,9 +4,8 @@
 a cli tool for visualising your database schemas. db-drawer checks the data model schemas of your project ("./models") folder and visualises by running on localhost in node environment. it attaches to your project as an npm package.
 
 currently, we have support only for sequelize and mongoose.
-For,  sequelize check: https://github.com/Bhanu-code/db-drawer
 
-Join Our Discord channel: https://discord.gg/hMQcQcng
+Join Our Discord channel: <a></a>https://discord.gg/hMQcQcng
 
 
 ## Installation
@@ -30,6 +29,8 @@ db-draw m
 ![alt text](sql.png)
 
 ## Local Setup
+
+Note: [ Don't commit to main branch, always create a seprate branch before raising PR ]
 
 ```javascript
 //To setup the project locally, for the repository and copy the forked copy the https url
