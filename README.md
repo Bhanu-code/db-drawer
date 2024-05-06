@@ -5,6 +5,8 @@ a cli tool for visualising your database schemas. db-drawer checks the data mode
 
 currently, we have support only for sequelize and mongoose.
 
+refer to Learn.md for building the project: <a href="https://github.com/Bhanu-code/db-drawer/blob/main/Learn.md">Learn.md</a>
+
 refer to the video link to get a quick glipmse of the project: https://youtu.be/FTxOed97E2A?si=RuxWV1J56LuWdVmA
 
 Join Our Discord channel: <a></a>https://discord.gg/hMQcQcng
