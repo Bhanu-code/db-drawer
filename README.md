@@ -7,7 +7,7 @@ currently, we have support only for sequelize and mongoose.
 
 refer to Learn.md for building the project: <a href="https://github.com/Bhanu-code/db-drawer/blob/main/Learn.md">Learn.md</a>
 
-rvideo demonstration of the project: <a href="https://youtu.be/bcp6hE_R75U?si=Rd8dj-SLtZwtVjwH">Demonstration video</a>
+video demonstration of the project: <a href="https://youtu.be/bcp6hE_R75U?si=Rd8dj-SLtZwtVjwH">Demonstration video</a>
 
 Join Our Discord channel: <a href="https://discord.gg/hMQcQcng">Discord</a>
 
