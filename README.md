@@ -2,9 +2,9 @@
 # db-drawer
 ![db-drawer](db-drawer-logo.png)
 
-a cli tool for visualising your database schemas. db-drawer checks the data model schemas of your project ("./models") folder and visualises by running on localhost in node environment. it attaches to your project as an npm package.
+a CLI tool for visualizing your database schemas. db-drawer checks the data model schemas of your project ("./models") folder and visualizes by running on localhost in the node environment. it attaches to your project as an npm package.
 
-currently, we have support only for sequelize and mongoose.
+currently, we have support only for Sequelize and Mongoose.
 
 refer to Learn.md for building the project: <a href="https://github.com/Bhanu-code/db-drawer/blob/main/Learn.md">Learn.md</a>
 
@@ -20,12 +20,12 @@ Install db-drawer with npm
 ```javascript
 //install using npm
 npm install -g db-drawer
-//open terminal and type
-//for sequelize
+//open the terminal and type
+//for sequel
 db-draw s
 //for mongoose
 db-draw m
-// hit enter and it will run localhost where you can see your schema, relationship and constraints in a tablular format
+// hit enter and it will run localhost where you can see your schema, relationship, and constraints in a tabular format
 ```
     
 ## Screenshots
@@ -35,26 +35,26 @@ db-draw m
 
 ## Local Setup
 
-Note: [ Don't commit to main branch, always create a seprate branch before raising PR ]
+Note: [ Don't commit to the main branch, always create a separate branch before raising PR ]
 
 ```javascript
-// You will need a demo project that has "/models" folder to see your models visualised.
-//To setup the project locally, for the repository and copy the forked copy the https url
+// You will need a demo project that has a "/models" folder to see your models visualized.
+//To set the project locally, for the repository and copy the forked copy https url
 //in the terminal write
 git clone [repo-url]
 cd db-drawer
 npm install
-// have a project that has "models" folder
+// have a project that has a "models" folder
 //install dbdrawer-mongo to the project globally
 npm install -g 
 // Open the demo project
-//run the command for sequelize
+//run the command to sequelize
 db-draw s
-//run the command for mongoose
+//run the command for Mongoose
 db-draw m
 
-// hit enter and it will run localhost where you can see your schema, relationship and constraints in a tablular format
-//create a branch, make changes and raise PR
+// hit enter and it will run localhost where you can see your schema, relationship, and constraints in a tabular format
+//create a branch, make changes, and raise PR
 ```
 
 
