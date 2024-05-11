@@ -53,25 +53,22 @@ function parsePrismaSchema() {
 
     return tables;
 }
+const schemaData = parsePrismaSchema();
+const tables = Object.keys(schemaData);
+const attrs =Object.values(schemaData);
+// res.json(schemaData);
 
-// Serve parsed Prisma schema data
-app.get("/prisma-schema", (req, res) => {
-    try {
-        const schemaData = parsePrismaSchema();
-        console.log(schemaData);
-        res.json(schemaData);
-    } catch (error) {
-        res.status(500).json({ error: error.message });
-    }
-});
 
 //listening to requests
 const PORT = process.env.PORT || 3001;
-app.listen(PORT, () => {
-    console.log(`Visualization server up at http://localhost:${PORT}`);
-});
 
 // SETTING ROUTE TO home.ejs
 app.get("/", (req, res) =>{
-  res.render(__dirname + "/../views/prisma.ejs", { modelsArr: [], fieldsArr: [] });
+    res.render(__dirname + "/../views/prisma.ejs", { modelsArr: tables, fieldsArr: attrs});
+});
+app.get("/schema", (req, res) =>{
+    res.json({modelsArr: tables, fieldsArr: attrs});
+});
+app.listen(PORT, () => {
+    console.log(`Visualization server up at http://localhost:${PORT}`);
 });
