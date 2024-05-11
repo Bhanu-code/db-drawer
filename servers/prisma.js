@@ -17,7 +17,7 @@ app.set("view engine", "ejs");
 
 // Function to parse Prisma schema
 function parsePrismaSchema() {
-    const prismaSchemaPath = path.join(__dirname, "../prisma/schema.prisma");
+    const prismaSchemaPath = path.join(process.cwd(), "/prisma/schema.prisma");
 
     // Check if Prisma schema file exists
     if (!fs.existsSync(prismaSchemaPath)) {
