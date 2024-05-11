@@ -54,7 +54,7 @@
 
   // SETTING ROUTE TO home.ejs
   app.get("/", (req, res) =>{
-    res.render(__dirname + "/../views/mongo.ejs", { modelsArr: arr, fieldsArr: fields})
+      res.render(__dirname + "/../views/mongo.ejs", { modelsArr: arr, fieldsArr: fields})
   });
 
 
