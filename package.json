@@ -6,7 +6,15 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "bin":{
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Bhanu-code/db-drawer.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Bhanu-code/db-drawer/issues"
+  },
+  "homepage": "https://github.com/Bhanu-code/db-drawer#readme",
+  "bin": {
     "db-draw": "index.js"
   },
   "author": "Bhanu Chowhan",

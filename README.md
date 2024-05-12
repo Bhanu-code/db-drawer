@@ -1,14 +1,13 @@
-
 # db-drawer
 ![db-drawer](db-drawer-logo.png)
 
-a cli tool for visualising your database schemas. db-drawer checks the data model schemas of your project ("./models") folder and visualises by running on localhost in node environment. it attaches to your project as an npm package.
+A cli tool for visualising your database schemas. db-drawer checks the data model schemas of your project ("./models") folder and visualises by running on localhost in node environment. it attaches to your project as an npm package.
 
-currently, we have support only for sequelize and mongoose.
+Currently, we have support only for sequelize and mongoose.
 
-refer to Learn.md for building the project: <a href="https://github.com/Bhanu-code/db-drawer/blob/main/Learn.md">Learn.md</a>
+Refer to Learn.md for building the project: <a href="https://github.com/Bhanu-code/db-drawer/blob/main/Learn.md">Learn.md</a>
 
-video demonstration of the project: <a href="https://youtu.be/bcp6hE_R75U?si=Rd8dj-SLtZwtVjwH">Demonstration video</a>
+Video demonstration of the project: <a href="https://youtu.be/bcp6hE_R75U?si=Rd8dj-SLtZwtVjwH">Demonstration video</a>
 
 Join Our Discord channel: <a href="https://discord.gg/hMQcQcng">Discord</a>
 
@@ -17,21 +16,38 @@ Join Our Discord channel: <a href="https://discord.gg/hMQcQcng">Discord</a>
 
 Install db-drawer with npm
 
+### Local installation
+
 ```javascript
-//install using npm
-npm install -g db-drawer
-//open terminal and type
-//for sequelize
-db-draw s
-//for mongoose
-db-draw m
-// hit enter and it will run localhost where you can see your schema, relationship and constraints in a tablular format
+//Install as dev dependency in your project
+npm install db-drawer --save-dev
+
+//For sequelize
+npx db-draw s
+
+//For mongoose
+npx db-draw m
 ```
+
+### Global installation
+
+```javascript
+npm install -g db-drawer
+
+cd /path/to/your/project
+
+//For sequelize
+db-draw s
+
+//For mongoose
+db-draw m
+```
+After executing the command, it will run localhost where you can see your schema, relationship and constraints in a tablular format
     
 ## Screenshots
 
-![alt text](mongo2.png)
-![alt text](sql.png)
+![db-draw with mongoDB](mongo2.png)
+![db-draw with SQL](sql.png)
 
 ## Local Setup
 
@@ -40,22 +56,32 @@ Note: [ Don't commit to main branch, always create a seprate branch before raisi
 ```javascript
 // You will need a demo project that has "/models" folder to see your models visualised.
 //To setup the project locally, for the repository and copy the forked copy the https url
-//in the terminal write
+
+//In the terminal write
 git clone [repo-url]
+
 cd db-drawer
+
 npm install
-// have a project that has "models" folder
-//install dbdrawer-mongo to the project globally
+
+// Have a project that has "models" folder
+//Install dbdrawer-mongo to the project globally
 npm install -g 
+
 // Open the demo project
-//run the command for sequelize
+cd /path/to/your/project
+
+//Run the command for sequelize
 db-draw s
-//run the command for mongoose
+
+//Run the command for mongoose
 db-draw m
 
-// hit enter and it will run localhost where you can see your schema, relationship and constraints in a tablular format
-//create a branch, make changes and raise PR
 ```
+
+Hit enter and it will run localhost where you can see your schema, relationship and constraints in a tablular format
+
+Create a branch, make changes and raise PR
 
 
 ## Contributing
