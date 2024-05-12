@@ -2,7 +2,7 @@
   //CREATING BASIC EXPRESS APP
   const express = require("express");
   const app = express();
-
+  
 
   // CONFIGURING FOR ENV
   const dotenv = require("dotenv");
