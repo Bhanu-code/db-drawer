@@ -9,7 +9,7 @@ const dotenv = require("dotenv");
 dotenv.config();
 
 // SUPPORT FOR JSON & PUBLIC FOLDER
-app.use(express.static(__dirname + "/public"));
+app.use(express.static(__dirname + "/../public"));
 app.use(express.json());
 
 // SETTING VIEW ENGINE AS EJS
