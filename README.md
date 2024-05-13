@@ -9,7 +9,7 @@ Refer to Learn.md for building the project: <a href="https://github.com/Bhanu-co
 
 Video demonstration of the project: <a href="https://youtu.be/bcp6hE_R75U?si=Rd8dj-SLtZwtVjwH">Demonstration video</a>
 
-Join Our Discord channel: <a href="https://discord.gg/hMQcQcng">Discord</a>
+Join Our Discord channel: <a href="https://discord.gg/bgnvc7Wc">Discord</a>
 
 
 ## Installation
