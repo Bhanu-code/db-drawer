@@ -74,7 +74,3 @@ app.get("/", (req, res) =>{
 app.listen(PORT, () => {
     console.log(`Visualization server up at http://localhost:${PORT}`);
 });
-//tests
-//check if main server is up
-//check if schema is parsed correctly
-//server should be able to render the ejs file
