@@ -10,6 +10,7 @@ dotenv.config();
 
 // SUPPORT FOR JSON & PUBLIC FOLDER
 app.use(express.static(__dirname + "/../public"));
+// app.use(express.static('public'));
 app.use(express.json());
 
 // SETTING VIEW ENGINE AS EJS
@@ -17,7 +18,7 @@ app.set("view engine", "ejs");
 
 // Function to parse Prisma schema
 function parsePrismaSchema() {
-    const prismaSchemaPath = path.join(process.cwd(), "/prisma/schema.prisma"||__dirname+"/prisma/schema.prisma");
+    const prismaSchemaPath = path.join(__dirname, "../prisma/schema.prisma"||process.cwd()+"../prisma/schema.prisma");
 
     // Check if Prisma schema file exists
     if (!fs.existsSync(prismaSchemaPath)) {
@@ -72,3 +73,7 @@ app.get("/schema", (req, res) =>{
 app.listen(PORT, () => {
     console.log(`Visualization server up at http://localhost:${PORT}`);
 });
+//tests
+//check if main server is up
+//check if schema is parsed correctly
+//server should be able to render the ejs file
