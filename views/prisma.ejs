@@ -10,7 +10,9 @@
     <link href="https://fonts.googleapis.com/css2?family=Reddit+Mono:wght@200..900&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/arrow-line/dist/arrow-line.min.js">
     </script>
-    <link rel="stylesheet" type="text/css" href="/styles/mongo.css">
+    <link rel="stylesheet" type="text/css" href="/styles/prisma.css">
+    <link rel="stylesheet" type="text/css" href="/styles/style.css">
+
     
 </head>
 <body>
@@ -28,14 +30,12 @@
                         <% fieldsArr[i][key].forEach(function(attr) { %>
                             <%if(attr.includes('default')){%>
                                 <td>
-                                    <button class="flag"
-                                        style="background-color:rgb(25, 246, 220)">Default</button>
+                                    <button class="flag" style="background-color:var(--default-color)">Default</button>
                                 </td>
                             <%}%>
                             <%if(attr.includes('@id')){%>
                                 <td>
-                                    <button class="flag"
-                                        style="background-color:rgb(217, 31, 31)">Primary Key</button>
+                                    <button class="flag" style="background-color:var(--primary-key-color)">Primary Key</button>
                                 </td>
                             <%}%>
                             <%if(attr.includes('Int')){%>
@@ -55,8 +55,7 @@
                             <%}%>
                             <%if(attr.includes('autoincrement')){%>
                                 <td>
-                                    <button class="flag"
-                                        style="background-color:rgb(233, 169, 59)">Auto Generated</button>
+                                    <button class="flag" style="background-color:var(--auto-generated-color)">Auto Generated</button>
                                 </td>
                             <%}%>
                             <%if(attr.includes('Float')){%>
@@ -66,14 +65,12 @@
                             <%}%>
                             <%if(attr.includes('unique')){%>
                                 <td>
-                                    <button class="flag"
-                                        style="background-color:rgb(26, 186, 112)">Unique</button>
+                                    <button class="flag" style="background-color:var(--Unique-Color)">Unique</button>
                                 </td>
                             <%}%>
                             <%if(attr.endsWith('?')){%>
                                 <td>
-                                    <button class="flag"
-                                        style="background-color:rgb(217, 99, 176)">Optional</button>
+                                    <button class="flag" style="background-color:var(--optional-color)">Optional</button>
                                 </td>
                             <%}%>
                             <%if(attr.includes("Big")){%>
@@ -83,8 +80,7 @@
                             <%}%>
                             <%if(attr.includes('relation')){%>
                                 <td>
-                                    <button class="flag"
-                                        style="background-color:rgb(0, 132, 255)">Relational</button>
+                                    <button class="flag" style="background-color:var(--relational-color)">Relational</button>
                                 </td>
                             <%}%>
                             <%if(attr.endsWith('[]')){%>

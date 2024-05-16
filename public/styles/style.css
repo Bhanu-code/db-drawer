@@ -1,0 +1,23 @@
+:root {
+    /* mongo.ejs */
+    --required-color: rgb(146, 248, 143);
+    --unique-color: rgb(79, 79, 253);
+    /* prisma.ejs */
+    --default-color: rgb(25, 246, 220);
+    --primary-key-color: rgb(217, 31, 31);
+    --auto-generated-color: rgb(233, 169, 59);
+    --Unique-Color: rgb(26, 186, 112);
+    --optional-color: rgb(217, 99, 176);
+    --relational-color: rgb(0, 132, 255);
+    --default-color: rgb(25, 246, 220);
+    --primary-key-color: rgb(217, 31, 31);
+    /* sqlz.ejs */
+    --allow-null-color: rgb(248, 252, 59);
+    --requiredcolor: rgb(93, 204, 89);
+    --auto-increment-color: rgb(243, 74, 52);
+    --uniquecolor: rgb(42, 241, 241);
+    --unique-text-color: black;
+    --primary-key-bg-color: blue;
+    --references-color: rgb(208, 42, 241);
+    --references-text-color: rgb(65, 61, 61);
+}

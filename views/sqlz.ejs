@@ -11,6 +11,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Reddit+Mono:wght@200..900&display=swap" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/arrow-line/dist/arrow-line.min.js"></script>
   <link rel="stylesheet" type="text/css" href="/styles/sqlz.css">
+  <link rel="stylesheet" type="text/css" href="/styles/style.css">
 
 </head>
 
@@ -56,32 +57,32 @@
 
               <% if(item.allowNull===true){ %>
                 <td>
-                  <button class="flag" style="background-color:rgb(248, 252, 59)">allowNull</button>
+                  <button class="flag" style="background-color:var(--allow-null-color)">allowNull</button>
                 </td>
                 <% } %>
 
                   <% if(item.required===true){ %>
                     <td>
-                      <button class="flag" style="background-color:rgb(93, 204, 89)">required</button>
+                      <button class="flag" style="background-color: var(--requiredcolor)">required</button>
                     </td>
                     <% } %>
 
                       <% if(item.autoIncrement===true){ %>
                         <td>
-                          <button class="flag" style="background-color:rgb(243, 74, 52)">autoIncrement</button>
+                          <button class="flag" style="background-color: var(--auto-increment-color)">autoIncrement</button>
                         </td>
                         <% } %>
 
                           <% if(item.unique===true){ %>
                             <td>
                               <button class="flag"
-                                style="background-color:rgb(42, 241, 241); color: black;">unique</button>
+                                style="background-color: var(--uniquecolor); color: var(--unique-text-color);">unique</button>
                             </td>
                             <% } %>
 
                               <% if(item.primaryKey===true){ %>
                                 <td id="st">
-                                  <button class="flag" style="background-color:blue">primary key</button>
+                                  <button class="flag" style="background-color:var(--primary-key-bg-color)">primary key</button>
                                 </td>
                                 <% } %>
 
@@ -92,7 +93,7 @@
 
                                           <td id="end">
                                             <button class="flag"
-                                              style="background-color:rgb(208, 42, 241); color:rgb(65, 61, 61)">
+                                              style="background-color:var(--references-color); color:var(--references-text-color)">
                                               references <%= refmodel %>.
                                                 <%= key %>
                                             </button>
