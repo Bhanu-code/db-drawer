@@ -10,6 +10,8 @@
     <script src="https://cdn.jsdelivr.net/npm/arrow-line/dist/arrow-line.min.js">
     </script>
     <link rel="stylesheet" type="text/css" href="/styles/mongo.css">
+    <link rel="stylesheet" type="text/css" href="/styles/style.css">
+
 </head>
 
 <body>
@@ -38,18 +40,18 @@
                                 <%= modelsArr[index].schema.path(i).instance %>
                             </td>
 
-                            <% if(field[i].required===true){ %>
+                            <% if (field[i].required === true) { %>
                                 <td>
-                                    <button class="flag" style="background-color:rgb(146, 248, 143)">required</button>
+                                    <button class="flag" style="background-color: var(--required-color)">required</button>
                                 </td>
-                                <% } %>
-
-                                    <% if(field[i].unique===true){ %>
-                                        <td>
-                                            <button class="flag"
-                                                style="background-color:rgb(79, 79, 253)">unique</button>
-                                        </td>
-                                        <% } %>
+                            <% } %>
+                            
+                            <% if (field[i].unique === true) { %>
+                                <td>
+                                    <button class="flag" style="background-color: var(--unique-color)">unique</button>
+                                </td>
+                            <% } %>
+                            
                     </tr>
                     <% }) %>   
 

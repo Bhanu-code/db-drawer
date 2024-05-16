@@ -5,100 +5,98 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Prisma Visualizer</title>
 
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Reddit+Mono:wght@200..900&display=swap"
-      rel="stylesheet"
-    />
-    <script src="https://cdn.jsdelivr.net/npm/arrow-line/dist/arrow-line.min.js"></script>
-    <link rel="stylesheet" href="/styles/prisma.css" />
-  </head>
+    <link rel="stylesheet" href="./styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Reddit+Mono:wght@200..900&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/arrow-line/dist/arrow-line.min.js">
+    </script>
+    <link rel="stylesheet" type="text/css" href="/styles/prisma.css">
+    <link rel="stylesheet" type="text/css" href="/styles/style.css">
 
-  <body>
+    
+</head>
+<body>
     <% for(let i = 0; i < modelsArr.length; i++) { %>
-    <table class="modelTable">
-      <thead>
-        <tr>
-          <th
-            class="modelName"
-            colspan="<%= Object.keys(fieldsArr[i]).length %>"
-          >
-            <%= modelsArr[i] %>
-          </th>
-        </tr>
-      </thead>
-      <tbody>
-        <% for(var key in fieldsArr[i]) { %>
-        <tr>
-          <td><%= key.toUpperCase() %></td>
-          <% fieldsArr[i][key].forEach(function(attr) { %>
-          <%if(attr.includes('default')){%>
-          <td>
-            <button class="flag" style="background-color: rgb(25, 246, 220)">
-              Default
-            </button>
-          </td>
-          <%}%> <%if(attr.includes('@id')){%>
-          <td>
-            <button class="flag" style="background-color: rgb(217, 31, 31)">
-              Primary Key
-            </button>
-          </td>
-          <%}%> <%if(attr.includes('Int')){%>
-          <td>
-            <b>Integer</b>
-          </td>
-          <%}%> <%if(attr.includes('String'||'string') &&
-          !attr.endsWith('[]')){%>
-          <td>
-            <b>String</b>
-          </td>
-          <%}%> <%if(attr.includes('Date'||'Time')){%>
-          <td>
-            <b>Date</b>
-          </td>
-          <%}%> <%if(attr.includes('autoincrement')){%>
-          <td>
-            <button class="flag" style="background-color: rgb(233, 169, 59)">
-              Auto Generated
-            </button>
-          </td>
-          <%}%> <%if(attr.includes('Float')){%>
-          <td>
-            <b>Float</b>
-          </td>
-          <%}%> <%if(attr.includes('unique')){%>
-          <td>
-            <button class="flag" style="background-color: rgb(26, 186, 112)">
-              Unique
-            </button>
-          </td>
-          <%}%> <%if(attr.endsWith('?')){%>
-          <td>
-            <button class="flag" style="background-color: rgb(217, 99, 176)">
-              Optional
-            </button>
-          </td>
-          <%}%> <%if(attr.includes("Big")){%>
-          <td>
-            <b>Big Int</b>
-          </td>
-          <%}%> <%if(attr.includes('relation')){%>
-          <td>
-            <button class="flag" style="background-color: rgb(0, 132, 255)">
-              Relational
-            </button>
-          </td>
-          <%}%> <%if(attr.endsWith('[]')){%>
-          <td>
-            <b> <%= attr.slice(0, -2) %> [Array]</b>
-          </td>
-          <%}%> <% }); %>
-        </tr>
-        <% } %>
-      </tbody>
-    </table>
+        <table class="modelTable">
+            <thead>
+                <tr>
+                    <th class="modelName" colspan="<%= Object.keys(fieldsArr[i]).length %>"><%= modelsArr[i] %></th>
+                </tr>
+            </thead>
+            <tbody>
+                <% for(var key in fieldsArr[i]) { %>
+                    <tr>
+                        <td><%= key.toUpperCase() %></td>
+                        <% fieldsArr[i][key].forEach(function(attr) { %>
+                            <%if(attr.includes('default')){%>
+                                <td>
+                                    <button class="flag" style="background-color:var(--default-color)">Default</button>
+                                </td>
+                            <%}%>
+                            <%if(attr.includes('@id')){%>
+                                <td>
+                                    <button class="flag" style="background-color:var(--primary-key-color)">Primary Key</button>
+                                </td>
+                            <%}%>
+                            <%if(attr.includes('Int')){%>
+                                <td>
+                                    <b>Integer</b>
+                                </td>
+                            <%}%>
+                            <%if(attr.includes('String'||'string') && !attr.endsWith('[]')){%>
+                                <td>
+                                   <b>String</b>
+                                </td>
+                            <%}%>
+                            <%if(attr.includes('Date'||'Time')){%>
+                                <td>
+                                    <b>Date</b>
+                                </td>
+                            <%}%>
+                            <%if(attr.includes('autoincrement')){%>
+                                <td>
+                                    <button class="flag" style="background-color:var(--auto-generated-color)">Auto Generated</button>
+                                </td>
+                            <%}%>
+                            <%if(attr.includes('Float')){%>
+                                <td>
+                                    <b>Float</b>
+                                </td>
+                            <%}%>
+                            <%if(attr.includes('unique')){%>
+                                <td>
+                                    <button class="flag" style="background-color:var(--Unique-Color)">Unique</button>
+                                </td>
+                            <%}%>
+                            <%if(attr.endsWith('?')){%>
+                                <td>
+                                    <button class="flag" style="background-color:var(--optional-color)">Optional</button>
+                                </td>
+                            <%}%>
+                            <%if(attr.includes("Big")){%>
+                                <td>
+                                    <b>Big Int</b>
+                                </td>
+                            <%}%>
+                            <%if(attr.includes('relation')){%>
+                                <td>
+                                    <button class="flag" style="background-color:var(--relational-color)">Relational</button>
+                                </td>
+                            <%}%>
+                            <%if(attr.endsWith('[]')){%>
+                                <td>
+                                   <b> <%= attr.slice(0, -2) %> [Array]</b>
+                                </td>
+                            <%}%>
+                
+                            %>
+                        <% }); %>
+                    </tr>
+                <% } %>
+            </tbody>
+        </table>
+
     <% } %>
     <a
       href="https://github.com/Bhanu-code/db-drawer"

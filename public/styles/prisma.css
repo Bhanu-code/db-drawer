@@ -1,4 +1,4 @@
-/* styles.css */
+
 body {
     font-family: "Reddit Mono", monospace;
     font-optical-sizing: auto;
@@ -6,18 +6,17 @@ body {
     font-style: normal;
 }
 
-table {
+
+table.modelTable {
+
     border-collapse: collapse;
     margin: auto;
     background-color: rgb(252, 252, 216);
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 }
 
-.table-name {
-    text-align: center;
-}
 
-th,
+th.modelName,
 td {
     text-align: left;
     padding: 8px;
@@ -42,6 +41,8 @@ tr:nth-child(even) {
     z-index: 9999;
 }
 
+
+
 .modelName {
     text-align: center;
     font-size: 1.5rem;
@@ -55,3 +56,4 @@ tr:nth-child(even) {
 }
 /* external prisma stylesheet
  */
+
