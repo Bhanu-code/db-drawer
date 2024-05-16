@@ -1,28 +1,35 @@
 
-body{
+/* Import fonts */
+@import url('https://fonts.googleapis.com/css2?family=Reddit+Mono:wght@200..900&display=swap');
+
+/* Apply font family with fallback */
+body {
   font-family: "Reddit Mono", monospace;
-  font-optical-sizing: auto;
-  font-weight: 500;
-  font-style: normal;
+}
+
+/* Other body styles */
+body {
   background-color: rgb(58, 55, 55);
 }
 
-.rate{
+/* Rate class styles */
+.rate {
   position: absolute;
-  /* left: 20rem; */
-  right: 1rem;
+  right: 1rem; /* Uncomment this line if you want it positioned on the right */
 }
 
-a{
+/* Remove underline from links */
+a {
   text-decoration: none;
 }
 
-img{
+/* Set dimensions for images */
+img {
   width: 20px;
   height: 20px;
 }
 
-
+/* Apply box-sizing to all elements */
 * {
   box-sizing: border-box;
 }
@@ -34,40 +41,42 @@ img{
   padding: 5px;
 }
 
-/* Clearfix (clear floats) */
+/* Clearfix */
 .row::after {
   content: "";
   clear: both;
   display: table;
 }
 
-
+/* Table styling */
 table {
   border-collapse: collapse;
-  /* margin: auto; */
   background-color: rgb(252, 252, 216);
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 }
 
-.table-name{
-  /* text-align: center; */
+/* Table name styles */
+.table-name {
   color: whitesmoke;
 }
 
-th,
-td {
+/* Table cell styles */
+th, td {
   text-align: left;
   padding: 8px;
 }
 
+/* Alternate row background color */
 tr:nth-child(even) {
   background-color: #d6eeee;
 }
 
+/* Flag button styles */
 .flag {
   color: white;
   border-radius: 5px;
   text-decoration: none;
   border: none;
   font-weight: bold;
+  /* Add additional styles like font-size and padding if needed */
 }

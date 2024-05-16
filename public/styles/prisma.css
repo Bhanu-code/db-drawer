@@ -1,3 +1,4 @@
+
 body {
     font-family: "Reddit Mono", monospace;
     font-optical-sizing: auto;
@@ -5,12 +6,15 @@ body {
     font-style: normal;
 }
 
+
 table.modelTable {
+
     border-collapse: collapse;
     margin: auto;
     background-color: rgb(252, 252, 216);
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 }
+
 
 th.modelName,
 td {
@@ -36,3 +40,20 @@ tr:nth-child(even) {
     right: 20px;
     z-index: 9999;
 }
+
+
+
+.modelName {
+    text-align: center;
+    font-size: 1.5rem;
+    font-weight: bold;
+    background-color: #f8f8f8;
+    padding: 10px;
+}
+
+.modelTable {
+    margin: 20px auto;
+}
+/* external prisma stylesheet
+ */
+
