@@ -50,6 +50,9 @@ refer to the video link to get a quick glipmse of the project: https://youtu.be/
 
 Project Architechure
 
+![WhatsApp Image 2024-05-18 at 00 20 55](https://github.com/suhanipaliwal/db-drawer/assets/161575955/d6854ec8-fa70-4e82-96ab-6ad278b4f258)
+
+
 Dataset can be downloaded from the mentioned below link:
 # <a name="3 Tech Stacks">Tech Stacks:</a>
 
