@@ -21,6 +21,13 @@ if (process.argv.length === 3) {
 
 // Initialization function
 function init() {
+    //check if /model is present or not
+    modelDirPath = path.join(process.cwd(), '/models')
+    if (!fs.existsSync(modelDirPath)){
+        console.log("Error : models directory not found")
+        process.exit()
+    }
+    
     nodeProcess = startProcess();
     watchFiles();
     process.on('SIGINT', async () => { await exitHandler() });
