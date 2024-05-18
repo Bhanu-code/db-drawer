@@ -24,10 +24,10 @@ function init() {
     //check if /model is present or not
     modelDirPath = path.join(process.cwd(), '/models')
     if (!fs.existsSync(modelDirPath)){
-        console.log("Error : models directory not found")
+        console.log("Error : models folder not found, create a models folder to visualize schemas")
         process.exit()
     }
-    
+
     nodeProcess = startProcess();
     watchFiles();
     process.on('SIGINT', async () => { await exitHandler() });
