@@ -1,6 +1,7 @@
 
 const express = require("express"); //CREATING BASIC EXPRESS APP
 const app = express();
+const net = require('net');
 
 // CONFIGURING FOR ENV
 const dotenv = require("dotenv");
@@ -47,14 +48,36 @@ arr.forEach((item) => {
 
 // console.log(fieldsArr)
 //
-app.listen(3001, (req, res) => {
-  console.log("visualization server up at http://localhost:3001");
-});
 
 // SETTING ROUTE TO home.ejs
 app.get("/", (req, res) =>
   res.render(__dirname + "/../views/sqlz.ejs", { data: fieldsArr })
 );
+let PORT=process.env.PORT || 3001;
+function startServer(port) {
+  const server = net.createServer();
 
+  server.once('error', (err) => {
+      if (err.code === 'EADDRINUSE') {
+          // port is currently in use, try the next one
+          startServer(++port);
+      } else {
+          // some other error, throw it
+          throw err;
+      }
+  });
+
+  server.once('listening', () => {
+      // close the server and start the express app on this port
+      server.close();
+      app.listen(port, () => {
+          console.log(`Visualization server up at http://localhost:${port}`);
+      });
+  });
+
+  server.listen(port);
+}
+
+startServer(PORT);
 // const arrowLine = require("arrow-line");
 // const arrow = arrowLine("#st", "#end", { color: "blue" });

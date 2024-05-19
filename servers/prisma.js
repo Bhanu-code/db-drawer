@@ -3,7 +3,7 @@ const express = require("express");
 const app = express();
 const fs = require("fs");
 const path = require("path");
-
+const net = require('net');
 // CONFIGURING FOR ENV
 const dotenv = require("dotenv");
 dotenv.config();
@@ -71,6 +71,28 @@ app.get("/", (req, res) =>{
 // app.get("/schema", (req, res) =>{
 //     res.json({modelsArr: tables, fieldsArr: attrs});
 // });
-app.listen(PORT, () => {
-    console.log(`Visualization server up at http://localhost:${PORT}`);
-});
+function startServer(port) {
+    const server = net.createServer();
+
+    server.once('error', (err) => {
+        if (err.code === 'EADDRINUSE') {
+            // port is currently in use, try the next one
+            startServer(++port);
+        } else {
+            // some other error, throw it
+            throw err;
+        }
+    });
+
+    server.once('listening', () => {
+        // close the server and start the express app on this port
+        server.close();
+        app.listen(port, () => {
+            console.log(`Visualization server up at http://localhost:${port}`);
+        });
+    });
+
+    server.listen(port);
+}
+
+startServer(PORT);
