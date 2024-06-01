@@ -51,6 +51,10 @@ function startProcess() {
         childProcess = spawn('node', [path.join(__dirname, '/servers/prisma.js')], {
             stdio: [process.stdin, process.stdout, process.stderr]
         });
+    } else if (process.argv[2] === 't') {
+        childProcess = spawn('node', [path.join(__dirname, '/servers/torm.js')], {
+            stdio: [process.stdin, process.stdout, process.stderr]
+        });
     }
 
     // Setup event handlers for child process
