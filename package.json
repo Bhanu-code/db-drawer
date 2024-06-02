@@ -1,31 +1,42 @@
 {
-  "name": "db-drawer",
-  "version": "2.0.1",
-  "description": "schema visualization and validation tool for node.js",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/Bhanu-code/db-drawer.git"
-  },
-  "bugs": {
-    "url": "https://github.com/Bhanu-code/db-drawer/issues"
-  },
-  "homepage": "https://github.com/Bhanu-code/db-drawer#readme",
-  "bin": {
-    "db-draw": "index.js"
-  },
-  "author": "Bhanu Chowhan",
-  "license": "ISC",
-  "dependencies": {
-    "arrow-line": "^0.7.5",
-    "chokidar": "^3.6.0",
-    "dotenv": "^16.4.5",
-    "ejs": "^3.1.9",
-    "express": "^4.19.2",
-    "net": "^1.0.2",
-    "read-directory": "^3.0.2"
-  }
+   "name": "db-drawer",
+   "version": "2.0.1",
+   "description": "schema visualization and validation tool for node.js",
+   "main": "index.js",
+   "scripts": {
+      "test": "echo \"Error: no test specified\" && exit 1",
+      "start": "ts-node src/index.ts",
+      "typeorm": "typeorm-ts-node-commonjs"
+   },
+   "repository": {
+      "type": "git",
+      "url": "git+https://github.com/Bhanu-code/db-drawer.git"
+   },
+   "bugs": {
+      "url": "https://github.com/Bhanu-code/db-drawer/issues"
+   },
+   "homepage": "https://github.com/Bhanu-code/db-drawer#readme",
+   "bin": {
+      "db-draw": "index.js"
+   },
+   "author": "Bhanu Chowhan",
+   "license": "ISC",
+   "dependencies": {
+      "arrow-line": "^0.7.5",
+      "chokidar": "^3.6.0",
+      "dotenv": "^16.4.5",
+      "ejs": "^3.1.10",
+      "express": "^4.19.2",
+      "mysql": "^2.18.1",
+      "net": "^1.0.2",
+      "pg": "^8.4.0",
+      "read-directory": "^3.0.2",
+      "reflect-metadata": "^0.1.13",
+      "typeorm": "0.3.20"
+   },
+   "devDependencies": {
+      "@types/node": "^16.11.10",
+      "ts-node": "10.9.1",
+      "typescript": "4.5.2"
+   }
 }
