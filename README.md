@@ -3,7 +3,7 @@
 
 A cli tool for visualising your database schemas. db-drawer checks the data model schemas of your project ("./models") folder and visualises by running on localhost in node environment. it attaches to your project as an npm package.
 
-Currently, we have support only for sequelize and mongoose.
+Currently, we have support for Sequelize, Mongoose, TypeORM, and Prisma.
 
 Refer to Learn.md for building the project: <a href="https://github.com/Bhanu-code/db-drawer/blob/main/Learn.md">Learn.md</a>
 
@@ -27,6 +27,12 @@ npx db-draw s
 
 //For mongoose
 npx db-draw m
+
+//For TypeORM
+npx db-draw t
+
+//For Prisma
+npx db-draw p
 ```
 
 ### Global installation
@@ -41,6 +47,12 @@ db-draw s
 
 //For mongoose
 db-draw m
+
+//For TypeORM
+db-draw t
+
+//For Prisma
+db-draw p
 ```
 After executing the command, it will run localhost where you can see your schema, relationship and constraints in a tablular format
     
@@ -77,6 +89,11 @@ db-draw s
 //Run the command for mongoose
 db-draw m
 
+//Run the command for TypeORM
+db-draw t
+
+//Run the command for Prisma
+db-draw p
 ```
 
 Hit enter and it will run localhost where you can see your schema, relationship and constraints in a tablular format
