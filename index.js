@@ -99,7 +99,7 @@ function startProcess() {
     processExited = false;
     childProcess.on('close', () => {
         processExited = true;
-        console.log('Server restarting');
+        console.log('server restarting');
     });
     childProcess.on('error', () => {
         processExited = true;
@@ -116,7 +116,7 @@ function watchFiles() {
         fs.watchFile(dir, { interval: 1000 }, (curr, prev) => {
             // Check if file content has changed
             if (curr.mtime !== prev.mtime) {
-                console.log("Files modified...");
+                console.log("files modified...");
                 clearTimeout(previousReloadTimer);
                 previousReloadTimer = setTimeout(async () => {
                     await reload();
