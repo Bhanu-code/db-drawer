@@ -3,6 +3,9 @@
 const { spawn } = require("child_process");
 const fs = require('fs');
 const path = require("path");
+const express = require('express');
+const puppeteer = require('puppeteer');
+const { PDFDocument } = require('pdf-lib');
 
 // Define variables
 let nodeProcess = null;
@@ -21,17 +24,52 @@ if (process.argv.length === 3) {
 
 // Initialization function
 function init() {
-    //check if /model is present or not
-    modelDirPath = path.join(process.cwd(), '/models')
-    if (!fs.existsSync(modelDirPath)){
-        console.log("Error : models folder not found, create a models folder to visualize schemas")
-        process.exit()
+    // Check if /model is present or not
+    modelDirPath = path.join(process.cwd(), '/models');
+    if (!fs.existsSync(modelDirPath)) {
+        console.log("Error: models folder not found, create a models folder to visualize schemas");
+        process.exit();
     }
+
+    const app = express();
+    const port = 3000;
+
+    // Serve static files (your visualizations)
+    app.use(express.static(path.join(__dirname, 'public')));
+
+    // Add routes for export functionality
+    app.get('/export/pdf', async (req, res) => {
+        try {
+            const pdf = await generatePDF();
+            res.setHeader('Content-Type', 'application/pdf');
+            res.setHeader('Content-Disposition', 'attachment; filename=schema.pdf');
+            res.send(pdf);
+        } catch (err) {
+            console.error(err);
+            res.status(500).send('Error generating PDF');
+        }
+    });
+
+    app.get('/export/png', async (req, res) => {
+        try {
+            const png = await generatePNG();
+            res.setHeader('Content-Type', 'image/png');
+            res.setHeader('Content-Disposition', 'attachment; filename=schema.png');
+            res.send(png);
+        } catch (err) {
+            console.error(err);
+            res.status(500).send('Error generating PNG');
+        }
+    });
+
+    app.listen(port, () => {
+        console.log(`Server is running at http://localhost:${port}`);
+    });
 
     nodeProcess = startProcess();
     watchFiles();
-    process.on('SIGINT', async () => { await exitHandler() });
-    process.on('SIGTERM', async () => { await exitHandler() });
+    process.on('SIGINT', async () => { await exitHandler(); });
+    process.on('SIGTERM', async () => { await exitHandler(); });
 }
 
 // Start the child process
@@ -61,7 +99,7 @@ function startProcess() {
     processExited = false;
     childProcess.on('close', () => {
         processExited = true;
-        console.log('server restarting');
+        console.log('Server restarting');
     });
     childProcess.on('error', () => {
         processExited = true;
@@ -78,7 +116,7 @@ function watchFiles() {
         fs.watchFile(dir, { interval: 1000 }, (curr, prev) => {
             // Check if file content has changed
             if (curr.mtime !== prev.mtime) {
-                console.log("files modified...");
+                console.log("Files modified...");
                 clearTimeout(previousReloadTimer);
                 previousReloadTimer = setTimeout(async () => {
                     await reload();
@@ -111,4 +149,24 @@ async function stopProcess() {
 async function exitHandler() {
     await stopProcess();
     process.exit();
+}
+
+// Generate PDF function
+async function generatePDF() {
+    const browser = await puppeteer.launch();
+    const page = await browser.newPage();
+    await page.goto(`http://localhost:${3000}`); // URL of your visualization
+    const pdf = await page.pdf({ format: 'A4' });
+    await browser.close();
+    return pdf;
+}
+
+// Generate PNG function
+async function generatePNG() {
+    const browser = await puppeteer.launch();
+    const page = await browser.newPage();
+    await page.goto(`http://localhost:${3000}`); // URL of your visualization
+    const screenshot = await page.screenshot({ fullPage: true });
+    await browser.close();
+    return screenshot;
 }
