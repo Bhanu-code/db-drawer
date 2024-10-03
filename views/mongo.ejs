@@ -1,75 +1,436 @@
+<!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>MongoDB Visualizer</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Reddit+Mono:wght@200..900&display=swap" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/arrow-line/dist/arrow-line.min.js">
-    </script>
-    <link rel="stylesheet" type="text/css" href="/styles/mongo.css">
-    <link rel="stylesheet" type="text/css" href="/styles/style.css">
+    <title>DB Drawer | Mongoose</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leader-line/1.0.7/leader-line.min.js"></script>
+    <style>
+        :root {
+            --bg-light: #f0f4f8;
+            --text-light: #2d3748;
+            --primary-light: #4a90e2;
+            --secondary-light: #f8f9fa;
+            --accent-light: #48bb78;
 
+            --bg-dark: #1a202c;
+            --text-dark: #e2e8f0;
+            --primary-dark: #81a1c1;
+            --secondary-dark: #2d3748;
+            --accent-dark: #68d391;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            margin: 0;
+            padding: 20px;
+            transition: background-color 0.3s, color 0.3s;
+            background-color: var(--bg-light);
+            color: var(--text-light);
+        }
+
+        body.dark-mode {
+            background-color: var(--bg-dark);
+            color: var(--text-dark);
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        h1 {
+            text-align: center;
+            color: var(--primary-light);
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .dark-mode h1 {
+            color: var(--primary-dark);
+        }
+
+        .table-container {
+            background-color: var(--secondary-light);
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            margin-bottom: 2rem;
+            overflow: hidden;
+            transition: background-color 0.3s;
+            position: relative;
+        }
+
+        .dark-mode .table-container {
+            background-color: var(--secondary-dark);
+            box-shadow: 0 4px 6px rgba(255, 255, 255, 0.1);
+        }
+
+        .table-name {
+            background-color: var(--primary-light);
+            color: white;
+            padding: 1rem;
+            margin: 0;
+            font-size: 1.2rem;
+        }
+
+        .dark-mode .table-name {
+            background-color: var(--primary-dark);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        td {
+            padding: 0.8rem 1rem;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+        }
+
+        .dark-mode td {
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .flag {
+            display: inline-block;
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .flag-required {
+            background-color: #e53e3e;
+            color: white;
+        }
+
+        .flag-unique {
+            background-color: var(--accent-light);
+            color: white;
+        }
+
+        .dark-mode .flag-unique {
+            background-color: var(--accent-dark);
+        }
+
+        .github-link {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            opacity: 0.7;
+            transition: opacity 0.3s;
+        }
+
+        .github-link:hover {
+            opacity: 1;
+        }
+
+        .github-link svg {
+            fill: var(--primary-light);
+        }
+
+        .dark-mode .github-link svg {
+            fill: var(--primary-dark);
+        }
+
+        .toggle-btn {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background-color: var(--primary-light);
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: background-color 0.3s;
+        }
+
+        .dark-mode .toggle-btn {
+            background-color: var(--primary-dark);
+        }
+
+        .relationship-line {
+            position: absolute;
+            pointer-events: none;
+        }
+
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+
+            h1 {
+                font-size: 2rem;
+            }
+
+            .table-name {
+                font-size: 1rem;
+            }
+
+            td {
+                padding: 0.6rem 0.8rem;
+            }
+        }
+        footer {
+            background-color: var(--secondary-light);
+            color: var(--text-light);
+            padding: 2rem 0;
+            margin-top: 2rem;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .dark-mode footer {
+            background-color: var(--secondary-dark);
+            color: var(--text-dark);
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            flex-wrap: wrap;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .footer-section {
+            flex: 1;
+            margin-bottom: 1rem;
+            min-width: 200px;
+        }
+
+        .footer-section h3 {
+            color: var(--primary-light);
+            margin-bottom: 1rem;
+        }
+
+        .dark-mode .footer-section h3 {
+            color: var(--primary-dark);
+        }
+
+        .footer-section ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .footer-section ul li {
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-section ul li a {
+            color: var(--text-light);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .dark-mode .footer-section ul li a {
+            color: var(--text-dark);
+        }
+
+        .footer-section ul li a:hover {
+
+            color: var(--primary-light);
+        }
+
+        .dark-mode .footer-section ul li a:hover {
+            color: var(--primary-dark);
+        }
+
+        .newsletter-form {
+            display: flex;
+            margin-top: 1rem;
+        }
+
+        .newsletter-form input[type="email"] {
+            flex: 1;
+            padding: 0.5rem;
+            border: 1px solid var(--primary-light);
+            border-radius: 4px 0 0 4px;
+            font-size: 1rem;
+        }
+
+        .dark-mode .newsletter-form input[type="email"] {
+            border-color: var(--primary-dark);
+            background-color: var(--bg-dark);
+            color: var(--text-dark);
+        }
+
+        .newsletter-form button {
+            padding: 0.5rem 1rem;
+            background-color: var(--primary-light);
+            color: white;
+            border: none;
+            border-radius: 0 4px 4px 0;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: background-color 0.3s;
+        }
+
+        .dark-mode .newsletter-form button {
+            background-color: var(--primary-dark);
+        }
+
+        .newsletter-form button:hover {
+            background-color: var(--accent-light);
+        }
+
+        .dark-mode .newsletter-form button:hover {
+            background-color: var(--accent-dark);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            margin-top: 2rem;
+            padding-top: 1rem;
+            border-top: 1px solid rgba(0, 0, 0, 0.1);
+        }
+
+        .dark-mode .footer-bottom {
+            border-top-color: rgba(255, 255, 255, 0.1);
+        }
+    </style>
 </head>
-
 <body>
     <div class="container">
-        <h1 style="text-align: center;">MongoDB Collections Schema</h1>
+        <h1>Schema</h1>
+        
+        <button class="toggle-btn" id="mode-toggle">Toggle Theme</button>
+        
+        <% fieldsArr.forEach((field, index) => { %>
+            <div class="table-container" id="<%= modelsArr[index].collection.collectionName %>">
+                <h2 class="table-name"><%= modelsArr[index].collection.collectionName %></h2>
+                <table>
+                    <% Object.keys(field).forEach(key => { %>
+                        <tr>
+                            <td><strong id="<%= `${modelsArr[index].collection.collectionName}-${key}` %>"><%= key %></strong></td>
+                            <td><%= modelsArr[index].schema.path(key).instance %></td>
+                            <td>
+                            <% if (field[key].required === true) { %>
+                                <span class="flag flag-required">required</span>
+                            <% } %>
+                        </td>
+                        <td>
+                            <% if (field[key].unique === true) { %>
+                                <span class="flag flag-unique">unique</span>
+                            <% } %>
+                        </td>
+                        </tr>
+                    <% }) %>
+                </table>
+            </div>
+        <% }) %>
     </div>
-    <% let index=0 %>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>About Us</h3>
+                <p>MongoDB Visualizer is a powerful tool <br> for visualizing and understanding <br> your database schema.</p>
+            </div>
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">Documentation</a></li>
+                    <li><a href="#">API</a></li>
+                    <li><a href="#">Contact</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Newsletter</h3>
+                <p>Subscribe to our newsletter for the latest updates and releases.</p>
+                <form class="newsletter-form" id="newsletter-form">
+                    <input type="email" placeholder="Enter your email" required>
+                    <button type="submit">Subscribe</button>
+                </form>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 MongoDB Visualizer. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <a href="https://github.com/Bhanu-code/db-drawer" target="_blank" class="github-link">
+        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24">
+            <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+        </svg>
+    </a>
+
+    <script>
+        const toggleButton = document.getElementById('mode-toggle');
+        const body = document.body;
     
-        <% fieldsArr.forEach(field=> { %>
-            <table>
-                <thead>
-                    <tr>
-                        <h2 id="end" class="table-name">
-                            <%= modelsArr[index].collection.collectionName %>
-                        </h2>
-                    </tr>
-                </thead>
-
-                <% const obj=Object.keys(field) %>
-                    <tr>
-                        <% obj.forEach(i=>{ %>
-                            <td>
-                                <%= i %>
-                            </td>
-                            <td>
-                                <%= modelsArr[index].schema.path(i).instance %>
-                            </td>
-
-                            <% if (field[i].required === true) { %>
-                                <td>
-                                    <button class="flag" style="background-color: var(--required-color)">required</button>
-                                </td>
-                            <% } %>
-                            
-                            <% if (field[i].unique === true) { %>
-                                <td>
-                                    <button class="flag" style="background-color: var(--unique-color)">unique</button>
-                                </td>
-                            <% } %>
-                            
-                    </tr>
-                    <% }) %>   
-
-            </table>
-            <a href="https://github.com/Bhanu-code/db-drawer" target="_blank" class="github-link">
-                <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="50" height="50" viewBox="0 0 50 50">
-                    <path d="M17.791,46.836C18.502,46.53,19,45.823,19,45v-5.4c0-0.197,0.016-0.402,0.041-0.61C19.027,38.994,19.014,38.997,19,39 C0,39,3,39,3.6,39c1.5,0,2.8-0.6,3.4-1.8c0.7-1.3,1-3.5,2.8-4.7C8.9,32.3,9.1,32,9.7,32c0.6,0.1,1.9,0.9,2.7,2 c0.9,1.1,1.8,2,3.4,2c2.487,0,3.82-0.125,4.622-0.555C21.356,34.056,22.649,33,24,33v-0.025c-5.668-0.182-9.289-2.066-10.975-4.975 c-3.665,0.042-6.856,0.405-8.677,0.707c-0.058-0.327-0.108-0.656-0.151-0.987c1.797-0.296,4.843-0.647,8.345-0.714 c-0.112-0.276-0.209-0.559-0.291-0.849c-3.511-0.178-6.541-0.039-8.187,0.097c-0.02-0.332-0.047-0.663-0.051-0.999 c1.649-0.135,4.597-0.27,8.018-0.111c-0.079-0.5-0.13-1.011-0.13-1.543c0-1.7,0.6-3.5,1.7-5c-0.5-1.7-1.2-5.3,0.2-6.6 c2.7,0,4.6,1.3,5.5,2.1C21,13.4,22.9,13,25,13s4,0.4,5.6,1.1c0.9-0.8,2.8-2.1,5.5-2.1c1.5,1.4,0.7,5,0.2,6.6 c1.1,1.5,1.7,3.2,1.6,5c0,0.484-0.045,0.951-0.11,1.409c3.499-0.172,6.527-0.034,8.204,0.102c-0.002,0.337-0.033,0.666-0.051,0.999 c-1.671-0.138-4.775-0.28-8.359-0.089c-0.089,0.336-0.197,0.663-0.325,0.98c3.546,0.046,6.665,0.389,8.548,0.689 c-0.043,0.332-0.093,0.661-0.151,0.987c-1.912-0.306-5.171-0.664-8.879-0.682C35.112,30.873,31.557,32.75,26,32.969V33 c2.6,0,5,3.9,5,6.6V45c0,0.823,0.498,1.53,1.209,1.836C41.37,43.804,48,35.164,48,25,C48,12.318,37.683,2,25,2S2,12.318,2,25 C2,35.164,8.63,43.804,17.791,46.836z"></path>
-                </svg>
-            </a>
-            <br>
-            <% index++ %>
-                <% }) %>
-                    </div>
-                    <!-- <script>
-                        setInterval(() => {
-                            location.reload()
-                        }, 2000);
-                    </script> -->
+        // Check and apply stored theme on load
+        if (localStorage.getItem('theme') === 'dark') {
+            body.classList.add('dark-mode');
+        }
+    
+        // Toggle between light and dark mode
+        toggleButton.addEventListener('click', () => {
+            body.classList.toggle('dark-mode');
+            localStorage.setItem('theme', body.classList.contains('dark-mode') ? 'dark' : 'light');
+            updateRelationshipLines();  // Redraw lines on theme change
+        });
+    
+        // Function to draw relationship lines
+        function drawRelationshipLines() {
+            const relationships = [
+                { from: 'Profile-user', to: 'User-_id', type: 'One-to-One' },
+                { from: 'Order-customer', to: 'Customer-_id', type: 'One-to-Many' },
+                { from: 'Product-categories', to: 'Category-_id', type: 'Many-to-Many' }
+                // Add more relationships here as needed
+            ];
+    
+            // Loop through relationships to create lines
+            relationships.forEach(rel => {
+                const fromElement = document.getElementById(rel.from);
+                const toElement = document.getElementById(rel.to);
+                if (fromElement && toElement) {
+                    const line = new LeaderLine(
+                        fromElement,
+                        toElement,
+                        {
+                            color: body.classList.contains('dark-mode') ? '#81a1c1' : '#4a90e2',
+                            size: 2,
+                            startSocket: 'right',
+                            endSocket: 'left',
+                            path: 'grid',
+                            startPlugColor: body.classList.contains('dark-mode') ? '#81a1c1' : '#4a90e2',
+                            endPlugColor: body.classList.contains('dark-mode') ? '#81a1c1' : '#4a90e2',
+                            middleLabel: LeaderLine.pathLabel(rel.type, { color: body.classList.contains('dark-mode') ? '#e2e8f0' : '#2d3748' })
+                        }
+                    );
+                    line.relationshipType = rel.type;  // Storing relationship type for reference
+                    line.positionByWindowResize = true;  // Auto-adjust on resize
+                }
+            });
+        }
+    
+        // Function to clear and redraw lines on theme change or resize
+        function updateRelationshipLines() {
+            document.querySelectorAll('.leader-line').forEach(line => line.remove());  // Remove old lines
+            drawRelationshipLines();  // Redraw updated lines
+        }
+    
+        // Draw relationship lines when the page loads
+        window.addEventListener('load', drawRelationshipLines);
+    
+        // Redraw lines on window resize to maintain correct positions
+        window.addEventListener('resize', updateRelationshipLines);
+        const newsletterForm = document.getElementById('newsletter-form');
+        newsletterForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            const email = this.querySelector('input[type="email"]').value;
+            // Here you would typically send the email to your server
+            alert(`Thank you for subscribing with ${email}!`);
+            this.reset();
+        });
+    </script>
 </body>
-
 </html>
